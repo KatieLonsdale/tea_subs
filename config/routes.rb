@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
-  resources :subscriptions
-  resources :customers
+  namespace :api do
+    namespace :v0 do
+      resources :customers, only: [:show] do
+        resources :subscriptions, only: [:create]
+      end
+    end
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
