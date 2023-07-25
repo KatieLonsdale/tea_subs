@@ -54,4 +54,31 @@ RSpec.describe "Subscriptions", type: :request do
       expect(data.dig(:errors, 0, :detail)).to eq("Validation failed: Frequency can't be blank")
     end
   end
+  describe 'cancel subscription' do
+    it 'cancels a customers tea subscription' do
+      customer = create(:customer)
+      subscription = create(:subscription, customer_id: customer.id)
+
+      expect(Subscription.count).to eq(1)
+
+      delete "/api/v0/customers/#{customer.id}/subscriptions/#{subscription.id}"
+
+      expect(response.status).to eq(204)
+      expect(Subscription.count).to eq(0)
+    end
+    it 'returns an error if user does not exist' do
+      customer = create(:customer)
+      subscription = create(:subscription, customer_id: customer.id)
+
+      expect(Subscription.count).to eq(1)
+      
+      delete "/api/v0/customers/324567/subscriptions/#{subscription.id}"
+      
+      expect(response.status).to eq(404)
+      expect(Subscription.count).to eq(1)
+
+      data = JSON.parse(response.body, symbolize_names: true)
+      expect(data.dig(:errors, 0, :detail)).to eq("Couldn't find Customer with 'id'=324567")
+    end
+  end
 end
