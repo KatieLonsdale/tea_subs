@@ -36,7 +36,7 @@ RSpec.describe "Subscriptions", type: :request do
         expect(created_sub[:attributes]).to have_key(attribute)
       end
     end
-    xit 'returns an error if a required param is missing' do
+    it 'returns an error if a required param is missing' do
       customer = create(:customer)
       expect(Subscription.count).to eq(0)
 
@@ -51,7 +51,7 @@ RSpec.describe "Subscriptions", type: :request do
 
       expect(response.status).to eq(400)
       data = JSON.parse(response.body, symbolize_names: true)
-      expect(data.dig(:errors, 0, :detail)).to eq("Validation failed.")
+      expect(data.dig(:errors, 0, :detail)).to eq("Validation failed: Frequency can't be blank")
     end
   end
 end
