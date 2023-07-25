@@ -1,24 +1,50 @@
-# README
+# Endpoints
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Create new subscription
 
-Things you may want to cover:
+```http
+POST /api/v0/customers/:id/subscriptions
+```
 
-* Ruby version
+<summary>  Details </summary>
+<br>
 
-* System dependencies
+Parameters: <br>
 
-* Configuration
+```
+title, price, frequency, customer id
+```
 
-* Database creation
+| Code | Description |
+| :--- | :---------- |
+| 201  | `Created`        |
 
-* Database initialization
+Example Value:
 
-* How to run the test suite
+```json
+{
+  "data": {
+    "id": 1,
+    "type": "user",
+    "attributes": {
+      "customer_id": 1,
+      "title": "basic",
+      "price": "$5.99",
+      "status": "active",
+      "frequency": "monthly"
+    }
+  }
+}
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+| Code | Description |
+| :--- | :---------- |
+| 400  | `Bad Request` |
 
-* Deployment instructions
+Example Value:
 
-* ...
+```json
+{
+  "errors": [{ "detail": "Validation failed." }]
+}
+```
