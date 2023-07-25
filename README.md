@@ -3,7 +3,7 @@
 ### Create new subscription
 
 ```http
-POST /api/v0/customers/:id/subscription
+POST /api/v0/customers/:id/subscriptions
 ```
 
 <summary>  Details </summary>
@@ -12,7 +12,7 @@ POST /api/v0/customers/:id/subscription
 Parameters: <br>
 
 ```
-title, price, frequency
+title, price, frequency, customer id
 ```
 
 | Code | Description |
@@ -28,7 +28,7 @@ Example Value:
     "type": "user",
     "attributes": {
       "customer_id": 1,
-      "title": "monthly",
+      "title": "basic",
       "price": "$5.99",
       "status": "active",
       "frequency": "monthly"
