@@ -13,6 +13,11 @@ class Api::V0::SubscriptionsController < ApplicationController
     subscription.destroy!
   end
 
+  def index
+    subscriptions = @_customer.subscriptions
+    render json: SubscriptionSerializer.new(subscriptions)
+  end
+
   private
   def subscription_params
     params.require(:subscription).permit(:title, :price, :frequency, :customer_id)
@@ -27,6 +32,6 @@ class Api::V0::SubscriptionsController < ApplicationController
   end
 
   def find_customer
-    Customer.find(params[:customer_id])
+    @_customer ||= Customer.find(params[:customer_id])
   end
 end
