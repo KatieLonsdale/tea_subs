@@ -1,9 +1,9 @@
 FactoryBot.define do
   factory :subscription do
-    customer { nil }
-    title { "MyString" }
-    price { "MyString" }
-    status { 1 }
-    frequency { "MyString" }
+    association :customer
+    title { Faker::Tea.variety }
+    price { Faker::Commerce.price(range:5..15, as_string: true) }
+    status { rand(0..1) }
+    frequency { ['monthly', 'yearly'].sample }
   end
 end
