@@ -79,3 +79,60 @@ Example Value:
   "errors": [{ "detail": "User does not exist" }]
 }
 ```
+### Get All Customer Subscriptions
+
+```http
+GET /api/v0/customers/:customer_id/subscriptions
+```
+
+<summary>  Details </summary>
+<br>
+
+Parameters: <br>
+
+```
+none required
+```
+
+| Code | Description |
+| :--- | :---------- |
+| 200  | `OK`        |
+
+``` json
+{
+  "data": [{
+    "id": "1",
+    "type": "subscription",
+    "attributes": {
+      "customer_id": 1,
+      "title": "basic",
+      "price": "$5.99",
+      "status": "active",
+      "frequency": "monthly"
+    }
+  },
+  {
+    "id": "2",
+    "type": "subscription",
+    "attributes": {
+      "customer_id": 1,
+      "title": "premium",
+      "price": "$9.99",
+      "status": "cancelled",
+      "frequency": "monthly"
+    }
+  }]
+}
+```
+
+| Code | Description |
+| :--- | :---------- |
+| 404  | `Not Found` |
+
+Example Value:
+
+```json
+{
+  "errors": [{ "detail": "User does not exist" }]
+}
+```
